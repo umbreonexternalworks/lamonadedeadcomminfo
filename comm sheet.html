@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commission Price Sheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a2e1a 0%, #0d1f0d 100%);
+            font-family: 'Arial', sans-serif;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            color: white;
+            flex-wrap: wrap;
+        }
+
+        .artist-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid #4ade80;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(74, 222, 128, 0.3);
+            animation: float 3s ease-in-out infinite;
+            transition: transform 0.3s;
+        }
+
+        .artist-photo:hover {
+            transform: scale(1.05);
+        }
+
+        .header-text {
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #ff4444;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #ff4444, 0 0 20px #ff4444; }
+            to { text-shadow: 0 0 20px #ff4444, 0 0 30px #ff4444, 0 0 40px #ff4444; }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: #4ade80;
+            text-decoration: none;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .option-card {
+            background: #2a2a2a;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            animation: slideIn 0.6s ease-out;
+            animation-fill-mode: both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-card:nth-child(1) { animation-delay: 0.1s; }
+        .option-card:nth-child(2) { animation-delay: 0.2s; }
+        .option-card:nth-child(3) { animation-delay: 0.3s; }
+        .option-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .option-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(74, 222, 128, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .option-card:hover::before {
+            left: 100%;
+        }
+
+        .option-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(74, 222, 128, 0.3);
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+
+        .image-placeholder:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(74, 222, 128, 0.3);
+        }
+
+        .option-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ff4444;
+        }
+
+        .price {
+            font-size: 32px;
+            font-weight: bold;
+            color: #4ade80;
+            margin: 15px 0;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .option-card p {
+            color: #4ade80;
+        }
+
+        .info-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .info-card {
+            background: #2a2a2a;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.8s ease-out;
+            transition: transform 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateX(5px);
+        }
+
+        .info-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #ff4444;
+            border-bottom: 3px solid #4ade80;
+            padding-bottom: 10px;
+        }
+
+        .info-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-card li {
+            padding: 8px 0;
+            color: #4ade80;
+            line-height: 1.6;
+        }
+
+        .info-card li:before {
+            content: "• ";
+            color: #ff4444;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .info-card p {
+            color: #4ade80;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        .info-card .sub-item {
+            padding-left: 20px;
+            font-size: 14px;
+            color: #4ade80;
+            line-height: 1.6;
+            margin-top: 5px;
+        }
+
+        .info-card .sub-item:before {
+            content: "- ";
+            color: #ff4444;
+            font-weight: bold;
+        }
+
+        .payment-info {
+            background: #2a2a2a;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .payment-info h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #ff4444;
+        }
+
+        .payment-info p {
+            color: #4ade80;
+            line-height: 1.8;
+        }
+
+        .terms-section {
+            margin-top: 40px;
+        }
+
+        .terms-card {
+            background: #2a2a2a;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: slideIn 1s ease-out;
+            margin-bottom: 20px;
+        }
+
+        .terms-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #ff4444;
+            border-bottom: 3px solid #4ade80;
+            padding-bottom: 10px;
+        }
+
+        .highlight-box {
+            background: rgba(255, 68, 68, 0.1);
+            border-left: 4px solid #ff4444;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .highlight-box p {
+            color: #4ade80;
+            margin: 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="pfp.png" alt="Artist Photo" class="artist-photo">
+            
+            <div class="header-text">
+                <h1>Commission Price Sheet</h1>
+                <p style="font-size: 18px; margin-top: 10px; color: #4ade80;">Lamonadedead</p>
+                
+                <div class="social-links">
+                    <a href="#">Devianart: Lamonadedead</a>
+                    <a href="#">Twitter: Lamonadedead</a>
+                    <a href="#">Fur Affinity: Lamonadedead</a>
+                    <a href="#">Bluesky: lamonadedead.bsky.social</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="options-grid">
+            <div class="option-card">
+                <div class="image-placeholder" style="background-image: url('img1.png');"></div>
+                <div class="option-title">Doodle Style</div>
+                <div class="price">$8</div>
+                <p>Extra character $5</p>
+            </div>
+
+            <div class="option-card">
+                <div class="image-placeholder" style="background-image: url('img2.png');"></div>
+                <div class="option-title">Lineart</div>
+                <div class="price">$10</div>
+                <p>Extra character $5</p>
+            </div>
+
+            <div class="option-card">
+                <div class="image-placeholder" style="background-image: url('img3.png');"></div>
+                <div class="option-title">Flat Colors</div>
+                <div class="price">$15</div>
+                <p>Extra character $5</p>
+            </div>
+
+            <div class="option-card">
+                <div class="image-placeholder" style="background-image: url('img4.png');"></div>
+                <div class="option-title">Full Shaded</div>
+                <div class="price">$20</div>
+                <p>Extra character $7</p>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <div class="info-card">
+                <h3>I DO</h3>
+                <ul>
+                    <li>Any gender</li>
+                    <li>Any character</li>
+                    <li>SFW and NSFW</li>
+                    <li>BDSM , feet fetish , tickling</li>
+                    <li>etc</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>I DONT DO</h3>
+                <ul>
+                    <li>Gore , pedophilia , scat , etc</li>
+                    <li>Diapers , vore , inflation , etc</li>
+                    <li>Complex characters like mchas</li>
+                    <li>Political related , inmoral stuff like racism , extreme fetishes</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="payment-info">
+            <h3>EXTRA</h3>
+            <p>Pay metods - PayPal</p>
+            <p>Doesnt appear your kink? , dont hesitate on asking!</p>
+        </div>
+
+        
+        <div class="terms-section">
+            <div class="terms-card">
+                <h3> Terms & Conditions</h3>
+                
+                <div class="highlight-box">
+                    <p>BE PATIENT: As soon as possible I'll send updates of my progress once it's started. This is due to I'm studying in the university so a good part of my time I'm studying.</p>
+                </div>
+
+                <div class="info-card" style="margin-top: 20px;">
+                    <h3>1. Starting</h3>
+                    <p>Following the list of commissioners, I'll tell you when your commission is ready to be worked on and when I start officially with it.</p>
+                </div>
+
+                <div class="info-card" style="margin-top: 20px;">
+                    <h3>2. Changes</h3>
+                    <p>You have for free 4 changes for the commission at least if they are minor changes or something very simple. The exceptions are big changes and redo.</p>
+                    
+                    <p style="margin-top: 15px; font-weight: bold;">Some considerations with the changes:</p>
+                    <div class="sub-item">The changes doesn't count if the error or mistake is by my fault</div>
+                    <div class="sub-item">The change would count if it's because of non-specified details</div>
+                    <div class="sub-item">The changes are not accumulative, 1 change = 1 change slot</div>
+                </div>
+
+                <div class="info-card" style="margin-top: 20px;">
+                    <h3>3. Ask Freely</h3>
+                    <p>Due to the university I usually be busy but you can ask any hesitation you have ^^. Feel free to ask when you want!</p>
+                </div>
+
+                <div class="info-card" style="margin-top: 20px;">
+                    <h3>4. Lineart</h3>
+                    <p>Once the sketch is finished and before work in the lineart, I'll ask you if all looks good for you ^^</p>
+                </div>
+
+                <div class="info-card" style="margin-top: 20px;">
+                    <h3>5. No Refunds</h3>
+                    <p>Once the commission has started, no refunds will be issued.</p>
+                </div>
+
+                <div class="info-card" style="margin-top: 20px;">
+                    <h3>6. Urgent Commission</h3>
+                    <p>If you need the commission for a specific date that is close or is urgent, there will be an extra charge of 50% of the original price.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
