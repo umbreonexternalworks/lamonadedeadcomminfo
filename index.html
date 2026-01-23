@@ -191,6 +191,40 @@
             color: #4ade80;
         }
 
+        .extras-card {
+            background: #2a2a2a;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.8s ease-out;
+            transition: transform 0.3s;
+            margin-bottom: 40px;
+        }
+
+        .extras-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .extras-card .section-title {
+            color: #ff4444;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+            margin-top: 15px;
+        }
+
+        .extras-card .section-title:first-child {
+            margin-top: 0;
+        }
+
+        .extras-card .item {
+            color: #4ade80;
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 5px;
+            padding-left: 5px;
+        }
+
         .info-section {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -360,6 +394,15 @@
             </div>
         </div>
 
+        <div class="extras-card">
+            <div class="section-title">BACKGROUNDS</div>
+            <div class="item">* No choose any specific bg will result on put a simple bg to make the draw more full, thats for free ^^</div>
+            <div class="item">- If you want a detailed bg, will be an extra fee depending the complexity of the background itself</div>
+            
+            <div class="section-title">ALTS</div>
+            <div class="item">- The alts prices will vary depending the number and difficulty of them</div>
+        </div>
+
         <div class="info-section">
             <div class="info-card">
                 <h3>I DO</h3>
@@ -389,10 +432,9 @@
             <p>Doesnt appear your kink? , dont hesitate on asking!</p>
         </div>
 
-        
         <div class="terms-section">
             <div class="terms-card">
-                <h3> Terms & Conditions</h3>
+                <h3>Terms & Conditions</h3>
                 
                 <div class="highlight-box">
                     <p>BE PATIENT: As soon as possible I'll send updates of my progress once it's started. This is due to I'm studying in the university so a good part of my time I'm studying.</p>
